@@ -26,6 +26,7 @@ TEST_F(SitlTest, TelemetrySync)
     EXPECT_EQ(telemetry->set_rate_velocity_ned(10.0), Telemetry::Result::Success);
     EXPECT_EQ(telemetry->set_rate_gps_info(10.0), Telemetry::Result::Success);
     EXPECT_EQ(telemetry->set_rate_battery(10.0), Telemetry::Result::Success);
+    EXPECT_EQ(telemetry->set_rate_ina219(10.0), Telemetry::Result::Success);
     EXPECT_EQ(telemetry->set_rate_actuator_control_target(10.0), Telemetry::Result::Success);
     EXPECT_EQ(telemetry->set_rate_fixedwing_metrics(10.0), Telemetry::Result::Success);
     EXPECT_EQ(telemetry->set_rate_ground_truth(10.0), Telemetry::Result::Success);
@@ -41,6 +42,7 @@ TEST_F(SitlTest, TelemetrySync)
         std::cout << "Velocity: " << telemetry->velocity_ned() << '\n';
         std::cout << "GPS Info: " << telemetry->gps_info() << '\n';
         std::cout << "Battery: " << telemetry->battery() << '\n';
+        std::cout << "Ina219: " << telemetry->ina219() << '\n';
         std::cout << "Actuators: " << telemetry->actuator_control_target() << '\n';
         std::cout << "Flight mode: " << telemetry->flight_mode() << '\n';
         std::cout << "Landed state: " << telemetry->landed_state()

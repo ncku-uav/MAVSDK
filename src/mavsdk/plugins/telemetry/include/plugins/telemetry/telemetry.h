@@ -391,6 +391,33 @@ public:
     friend std::ostream& operator<<(std::ostream& str, Telemetry::Battery const& battery);
 
     /**
+     * @brief Ina219 type.
+     */
+    struct Ina219 {
+        uint64_t time; /*<  Time since system start*/
+        float leftVoltage; /*< [volts] Voltage in volts*/
+        float leftCurrent; /*< [amperes] Current in amperes*/
+        float leftPower; /*< [watts] Power in watts*/
+        float rightVoltage; /*< [volts] Voltage in volts*/
+        float rightCurrent; /*< [amperes] Current in amperes*/
+        float rightPower; /*< [watts] Power in watts*/
+    };
+
+    /**
+     * @brief Equal operator to compare two `Telemetry::Ina219` objects.
+     *
+     * @return `true` if items are equal.
+     */
+    friend bool operator==(const Telemetry::Ina219& lhs, const Telemetry::Ina219& rhs);
+
+    /**
+     * @brief Stream operator to print information about a `Telemetry::Ina219`.
+     *
+     * @return A reference to the stream.
+     */
+    friend std::ostream& operator<<(std::ostream& str, Telemetry::Ina219 const& ina219);
+
+    /**
      * @brief Health type.
      */
     struct Health {
@@ -1252,6 +1279,24 @@ public:
     Battery battery() const;
 
     /**
+     * @brief Callback type for subscribe_ina219.
+     */
+
+    using Ina219Callback = std::function<void(Ina219)>;
+
+    /**
+     * @brief Subscribe to 'ina219' updates.
+     */
+    void subscribe_ina219(Ina219Callback callback);
+
+    /**
+     * @brief Poll for 'Ina219' (blocking).
+     *
+     * @return One Ina219update.
+     */
+    Ina219 ina219() const;
+
+    /**
      * @brief Callback type for subscribe_flight_mode.
      */
 
@@ -1737,6 +1782,23 @@ public:
      * @return Result of request.
      */
     Result set_rate_battery(double rate_hz) const;
+
+    /**
+     * @brief Set rate to 'ina219' updates.
+     *
+     * This function is non-blocking. See 'set_rate_ina219' for the blocking counterpart.
+     */
+    void set_rate_ina219_async(double rate_hz, const ResultCallback callback);
+
+    /**
+     * @brief Set rate to 'ina219' updates.
+     *
+     * This function is blocking. See 'set_rate_ina219_async' for the non-blocking counterpart.
+     *
+     * @return Result of request.
+     */
+    Result set_rate_ina219(double rate_hz) const;
+
 
     /**
      * @brief Set rate to 'RC status' updates.

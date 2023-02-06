@@ -17,6 +17,7 @@ using AngularVelocityBody = Telemetry::AngularVelocityBody;
 using GpsInfo = Telemetry::GpsInfo;
 using RawGps = Telemetry::RawGps;
 using Battery = Telemetry::Battery;
+using Ina219 = Telemetry::Ina219;
 using Health = Telemetry::Health;
 using RcStatus = Telemetry::RcStatus;
 using StatusText = Telemetry::StatusText;
@@ -199,6 +200,17 @@ Telemetry::Battery Telemetry::battery() const
 {
     return _impl->battery();
 }
+
+void Telemetry::subscribe_ina219(Ina219Callback callback)
+{
+    _impl->subscribe_ina219(callback);
+}
+
+Telemetry::Ina219 Telemetry::ina219() const
+{
+    return _impl->ina219();
+}
+
 
 void Telemetry::subscribe_flight_mode(FlightModeCallback callback)
 {
@@ -478,6 +490,16 @@ void Telemetry::set_rate_battery_async(double rate_hz, const ResultCallback call
 Telemetry::Result Telemetry::set_rate_battery(double rate_hz) const
 {
     return _impl->set_rate_battery(rate_hz);
+}
+
+void Telemetry::set_rate_ina219_async(double rate_hz, const ResultCallback callback)
+{
+    _impl->set_rate_ina219_async(rate_hz, callback);
+}
+
+Telemetry::Result Telemetry::set_rate_ina219(double rate_hz) const
+{
+    return _impl->set_rate_ina219(rate_hz);
 }
 
 void Telemetry::set_rate_rc_status_async(double rate_hz, const ResultCallback callback)
@@ -802,6 +824,39 @@ std::ostream& operator<<(std::ostream& str, Telemetry::Battery const& battery)
     str << "    remaining_percent: " << battery.remaining_percent << '\n';
     str << '}';
     return str;
+}
+
+bool operator==(const Telemetry::Ina219& lhs, const Telemetry::Ina219& rhs)
+{
+    return ((std::isnan(rhs.time) && std::isnan(lhs.time)) ||
+            rhs.time == lhs.time) &&
+           ((std::isnan(rhs.leftVoltage) && std::isnan(lhs.leftVoltage)) ||
+            rhs.leftVoltage == lhs.leftVoltage) &&
+           ((std::isnan(rhs.leftCurrent) && std::isnan(lhs.leftCurrent)) ||
+            rhs.leftCurrent == lhs.leftCurrent) &&
+           ((std::isnan(rhs.leftPower) && std::isnan(lhs.leftPower)) ||
+            rhs.leftPower == lhs.leftPower) &&
+           ((std::isnan(rhs.rightVoltage) && std::isnan(lhs.rightVoltage)) ||
+            rhs.leftCurrent == lhs.leftCurrent) &&
+           ((std::isnan(rhs.rightCurrent) && std::isnan(lhs.rightCurrent)) ||
+            rhs.rightCurrent== lhs.rightCurrent) &&
+           ((std::isnan(rhs.rightPower) && std::isnan(lhs.rightPower)) ||
+            rhs.rightPower == lhs.rightPower);
+}
+
+std::ostream& operator<<(std::ostream& str, Telemetry::Ina219 const& ina219)
+{
+    str << std::setprecision(15);
+    str << "ina219:" << '\n' << "{\n";
+    str << "    time: " << ina219.time << '\n';
+    str << "    leftVoltage: " << ina219.leftVoltage << '\n';
+    str << "    leftCurrent: " << ina219.leftCurrent << '\n';
+    str << "    leftPower: " << ina219.leftPower << '\n';
+    str << "    rightVoltage: " << ina219.rightVoltage << '\n';
+    str << "    rightCurrent: " << ina219.rightCurrent << '\n';
+    str << "    rightPower: " << ina219.rightPower << '\n';
+    str << '}';
+
 }
 
 bool operator==(const Telemetry::Health& lhs, const Telemetry::Health& rhs)

@@ -27,6 +27,7 @@ static void print_velocity_ned(Telemetry::VelocityNed velocity_ned);
 static void print_imu(Telemetry::Imu imu);
 static void print_gps_info(Telemetry::GpsInfo gps_info);
 static void print_battery(Telemetry::Battery battery);
+static void print_ina219(Telemetry::Ina219 ina219);
 static void print_rc_status(Telemetry::RcStatus rc_status);
 static void print_position_velocity_ned(Telemetry::PositionVelocityNed position_velocity_ned);
 static void print_unix_epoch_time_us(uint64_t time_us);
@@ -51,6 +52,7 @@ static bool _received_velocity = false;
 static bool _received_imu = false;
 static bool _received_gps_info = false;
 static bool _received_battery = false;
+static bool _received_ina219 = false;
 static bool _received_rc_status = false;
 static bool _received_position_velocity_ned = false;
 static bool _received_actuator_control_target = false;
@@ -102,6 +104,10 @@ TEST_F(SitlTest, TelemetryAsync)
     std::this_thread::sleep_for(std::chrono::milliseconds(100));
 
     telemetry->set_rate_battery_async(
+        10.0, [](Telemetry::Result result) { return receive_result(result); });
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+
+    telemetry->set_rate_ina219_async(
         10.0, [](Telemetry::Result result) { return receive_result(result); });
     std::this_thread::sleep_for(std::chrono::milliseconds(100));
 
@@ -159,6 +165,8 @@ TEST_F(SitlTest, TelemetryAsync)
     telemetry->subscribe_gps_info([](Telemetry::GpsInfo gps_info) { print_gps_info(gps_info); });
 
     telemetry->subscribe_battery([](Telemetry::Battery battery) { print_battery(battery); });
+
+    telemetry->subscribe_ina219([](Telemetry::Ina219 ina219) { print_ina219(ina219); });
 
     telemetry->subscribe_rc_status(
         [](Telemetry::RcStatus rc_status) { print_rc_status(rc_status); });
@@ -331,6 +339,14 @@ void print_battery(Telemetry::Battery battery)
               << "remaining: " << int(battery.remaining_percent * 1e2f) << " %" << '\n';
 
     _received_battery = true;
+}
+
+void print_ina219(Telemetry::Ina219 ina219)
+{
+    std::cout << "Ina219 " << "Left: " << ina219.leftVoltage << " v," << ina219.leftCurrent << " a," << ina219.leftPower << " w,"
+              << "Right: " << ina219.rightVoltage << " v," << ina219.rightCurrent << " a," << ina219.rightPower << " w,"<< '\n';
+
+    _received_ina219 = true;
 }
 
 void print_rc_status(Telemetry::RcStatus rc_status)

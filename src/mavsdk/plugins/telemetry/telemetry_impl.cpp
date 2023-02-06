@@ -86,6 +86,11 @@ void TelemetryImpl::init()
         this);
 
     _parent->register_mavlink_message_handler(
+        MAVLINK_MSG_ID_ina219,
+        [this](const mavlink_message_t& message) { process_ina219_status(message); },
+        this);
+
+    _parent->register_mavlink_message_handler(
         MAVLINK_MSG_ID_HEARTBEAT,
         [this](const mavlink_message_t& message) { process_heartbeat(message); },
         this);
@@ -295,6 +300,12 @@ Telemetry::Result TelemetryImpl::set_rate_battery(double rate_hz)
         _parent->set_msg_rate(MAVLINK_MSG_ID_SYS_STATUS, rate_hz));
 }
 
+Telemetry::Result TelemetryImpl::set_rate_ina219(double rate_hz)
+{
+    return telemetry_result_from_command_result(
+        _parent->set_msg_rate(MAVLINK_MSG_ID_SYS_STATUS, rate_hz));
+}
+
 Telemetry::Result TelemetryImpl::set_rate_rc_status(double rate_hz)
 {
     UNUSED(rate_hz);
@@ -488,6 +499,16 @@ void TelemetryImpl::set_rate_gps_info_async(double rate_hz, Telemetry::ResultCal
 }
 
 void TelemetryImpl::set_rate_battery_async(double rate_hz, Telemetry::ResultCallback callback)
+{
+    _parent->set_msg_rate_async(
+        MAVLINK_MSG_ID_SYS_STATUS,
+        rate_hz,
+        [callback](MavlinkCommandSender::Result command_result, float) {
+            command_result_callback(command_result, callback);
+        });
+}
+
+void TelemetryImpl::set_rate_ina219_async(double rate_hz, Telemetry::ResultCallback callback)
 {
     _parent->set_msg_rate_async(
         MAVLINK_MSG_ID_SYS_STATUS,
@@ -1175,6 +1196,29 @@ void TelemetryImpl::process_battery_status(const mavlink_message_t& message)
             auto arg = battery();
             _parent->call_user_callback([callback, arg]() { callback(arg); });
         }
+    }
+}
+
+void TelemetryImpl::process_ina219_status(const mavlink_message_t& message)
+{
+    mavlink_ina219_t ina219_reading;
+    mavlink_msg_ina219_decode(&message, &ina219_reading);
+    Telemetry::Ina219 new_ina219;
+    new_ina219.leftVoltage = ina219_reading.voltageLeft;
+    new_ina219.leftCurrent = ina219_reading.currentLeft;
+    new_ina219.leftPower = ina219_reading.powerLeft;
+    new_ina219.rightVoltage = ina219_reading.voltageRight;
+    new_ina219.rightCurrent = ina219_reading.currentRight;
+    new_ina219.rightPower = ina219_reading.powerRight;
+    new_ina219.time = ina219_reading.timestamp;
+
+    set_ina219(new_ina219);
+
+    std::lock_guard<std::mutex> lock(_subscription_mutex);
+    if (_ina219_subscription) {
+        auto callback = _ina219_subscription;
+        auto arg = ina219();
+        _parent->call_user_callback([callback, arg]() { callback(arg); });
     }
 }
 
@@ -1957,6 +2001,18 @@ void TelemetryImpl::set_battery(Telemetry::Battery battery)
     _battery = battery;
 }
 
+Telemetry::Ina219 TelemetryImpl::ina219() const
+{
+    std::lock_guard<std::mutex> lock(_ina219_mutex);
+    return _ina219;
+}
+
+void TelemetryImpl::set_ina219(Telemetry::Ina219 ina219)
+{
+    std::lock_guard<std::mutex> lock(_ina219_mutex);
+    _ina219 = ina219;
+}
+
 Telemetry::FlightMode TelemetryImpl::flight_mode() const
 {
     return telemetry_flight_mode_from_flight_mode(_parent->get_flight_mode());
@@ -2270,6 +2326,12 @@ void TelemetryImpl::subscribe_battery(Telemetry::BatteryCallback& callback)
 {
     std::lock_guard<std::mutex> lock(_subscription_mutex);
     _battery_subscription = callback;
+}
+
+void TelemetryImpl::subscribe_ina219(Telemetry::Ina219Callback& callback)
+{
+    std::lock_guard<std::mutex> lock(_subscription_mutex);
+    _ina219_subscription = callback;
 }
 
 void TelemetryImpl::subscribe_flight_mode(Telemetry::FlightModeCallback& callback)

@@ -18,6 +18,7 @@ using AngularVelocityBody = TelemetryServer::AngularVelocityBody;
 using GpsInfo = TelemetryServer::GpsInfo;
 using RawGps = TelemetryServer::RawGps;
 using Battery = TelemetryServer::Battery;
+using Ina219 = TelemetryServer::Ina219;
 using RcStatus = TelemetryServer::RcStatus;
 using StatusText = TelemetryServer::StatusText;
 using ActuatorControlTarget = TelemetryServer::ActuatorControlTarget;
@@ -87,6 +88,11 @@ TelemetryServer::Result TelemetryServer::publish_raw_gps(RawGps raw_gps, GpsInfo
 TelemetryServer::Result TelemetryServer::publish_battery(Battery battery) const
 {
     return _impl->publish_battery(battery);
+}
+
+TelemetryServer::Result TelemetryServer::publish_ina219(Ina219 ina219) const
+{
+    return _impl->publish_ina219(ina219);
 }
 
 TelemetryServer::Result TelemetryServer::publish_status_text(StatusText status_text) const
@@ -321,6 +327,40 @@ std::ostream& operator<<(std::ostream& str, TelemetryServer::Battery const& batt
     str << '}';
     return str;
 }
+
+bool operator==(const TelemetryServer::Ina219& lhs, const TelemetryServer::Ina219& rhs)
+{
+    return ((std::isnan(rhs.time) && std::isnan(lhs.time)) ||
+            rhs.time == lhs.time) &&
+           ((std::isnan(rhs.leftVoltage) && std::isnan(lhs.leftVoltage)) ||
+            rhs.leftVoltage == lhs.leftVoltage) &&
+           ((std::isnan(rhs.leftCurrent) && std::isnan(lhs.leftCurrent)) ||
+            rhs.leftCurrent == lhs.leftCurrent) &&
+           ((std::isnan(rhs.leftPower) && std::isnan(lhs.leftPower)) ||
+            rhs.leftPower == lhs.leftPower) &&
+           ((std::isnan(rhs.rightVoltage) && std::isnan(lhs.rightVoltage)) ||
+            rhs.leftCurrent == lhs.leftCurrent) &&
+           ((std::isnan(rhs.rightCurrent) && std::isnan(lhs.rightCurrent)) ||
+            rhs.rightCurrent== lhs.rightCurrent) &&
+           ((std::isnan(rhs.rightPower) && std::isnan(lhs.rightPower)) ||
+            rhs.rightPower == lhs.rightPower);
+}
+
+std::ostream& operator<<(std::ostream& str, TelemetryServer::Ina219 const& ina219)
+{
+    str << std::setprecision(15);
+    str << "ina219:" << '\n' << "{\n";
+    str << "    time: " << ina219.time << '\n';
+    str << "    leftVoltage: " << ina219.leftVoltage << '\n';
+    str << "    leftCurrent: " << ina219.leftCurrent << '\n';
+    str << "    leftPower: " << ina219.leftPower << '\n';
+    str << "    rightVoltage: " << ina219.rightVoltage << '\n';
+    str << "    rightCurrent: " << ina219.rightCurrent << '\n';
+    str << "    rightPower: " << ina219.rightPower << '\n';
+    str << '}';
+
+}
+
 
 bool operator==(const TelemetryServer::RcStatus& lhs, const TelemetryServer::RcStatus& rhs)
 {

@@ -43,6 +43,8 @@ public:
 
     TelemetryServer::Result publish_battery(TelemetryServer::Battery battery);
 
+    TelemetryServer::Result publish_ina219(TelemetryServer::Ina219 ina219);
+  
     TelemetryServer::Result publish_status_text(TelemetryServer::StatusText status_text);
 
     TelemetryServer::Result publish_odometry(TelemetryServer::Odometry odometry);

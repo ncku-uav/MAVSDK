@@ -197,6 +197,28 @@ TelemetryServer::Result TelemetryServerImpl::publish_battery(TelemetryServer::Ba
                                         TelemetryServer::Result::Unsupported;
 }
 
+TelemetryServer::Result TelemetryServerImpl::publish_ina219(
+    TelemetryServer::Ina219 ina219)
+{
+    mavlink_message_t msg;
+    mavlink_msg_ina219_pack(
+        _parent->get_own_system_id(),
+        _parent->get_own_component_id(),
+        &msg,
+        get_boot_time_ms(),
+        ina219.leftVoltage,
+        ina219.leftCurrent,
+        ina219.leftPower,
+        ina219.rightVoltage,
+        ina219.rightCurrent,
+        ina219.rightPower);
+
+    add_msg_cache(MAVLINK_MSG_ID_ina219, msg);
+
+    return _parent->send_message(msg) ? TelemetryServer::Result::Success :
+                                        TelemetryServer::Result::Unsupported;
+}
+
 TelemetryServer::Result
 TelemetryServerImpl::publish_status_text(TelemetryServer::StatusText status_text)
 {

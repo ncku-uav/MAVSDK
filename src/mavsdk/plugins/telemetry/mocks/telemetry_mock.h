@@ -17,6 +17,7 @@ public:
     MOCK_CONST_METHOD1(subscribe_gps_info, void(Telemetry::GpsInfoCallback)){};
     MOCK_CONST_METHOD1(subscribe_raw_gps, void(Telemetry::RawGpsCallback)){};
     MOCK_CONST_METHOD1(subscribe_battery, void(Telemetry::BatteryCallback)){};
+    MOCK_CONST_METHOD1(subscribe_ina219, void(Telemetry:Ina219Callback)){};
     MOCK_CONST_METHOD1(subscribe_flight_mode, void(Telemetry::FlightModeCallback)){};
     MOCK_CONST_METHOD1(subscribe_landed_state, void(Telemetry::LandedStateCallback)){};
     MOCK_CONST_METHOD1(
@@ -58,6 +59,7 @@ public:
     MOCK_METHOD1(set_rate_gps_info, Telemetry::Result(double)){};
     MOCK_METHOD1(set_rate_raw_gps, Telemetry::Result(double)){};
     MOCK_METHOD1(set_rate_battery, Telemetry::Result(double)){};
+    MOCK_METHOD1(set_rate_ina219, Telemetry::Result(double)){};
     MOCK_METHOD1(set_rate_rc_status, Telemetry::Result(double)){};
     MOCK_METHOD1(set_rate_actuator_control_target, Telemetry::Result(double)){};
     MOCK_METHOD1(set_rate_actuator_output_status, Telemetry::Result(double)){};
@@ -82,6 +84,7 @@ public:
     MOCK_CONST_METHOD2(set_rate_velocity_ned_async, void(double, Telemetry::ResultCallback)){};
     MOCK_CONST_METHOD2(set_rate_gps_info_async, void(double, Telemetry::ResultCallback)){};
     MOCK_CONST_METHOD2(set_rate_battery_async, void(double, Telemetry::ResultCallback)){};
+    MOCK_CONST_METHOD2(set_rate_ina219_async, void(double, Telemetry::ResultCallback)){};
     MOCK_CONST_METHOD2(set_rate_rc_status_async, void(double, Telemetry::ResultCallback)){};
     MOCK_CONST_METHOD2(
         set_rate_actuator_control_target_async, void(double, Telemetry::ResultCallback)){};

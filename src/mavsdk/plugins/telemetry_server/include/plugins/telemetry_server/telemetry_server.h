@@ -371,6 +371,34 @@ public:
     friend std::ostream& operator<<(std::ostream& str, TelemetryServer::Battery const& battery);
 
     /**
+     * @brief Ina219 type.
+     */
+    struct Ina219 {
+        uint64_t time; /*<  Time since system start*/
+        float leftVoltage; /*< [volts] Voltage in volts*/
+        float leftCurrent; /*< [amperes] Current in amperes*/
+        float leftPower; /*< [watts] Power in watts*/
+        float rightVoltage; /*< [volts] Voltage in volts*/
+        float rightCurrent; /*< [amperes] Current in amperes*/
+        float rightPower; /*< [watts] Power in watts*/
+    };
+
+    /**
+     * @brief Equal operator to compare two `TelemetryServer::Ina219` objects.
+     *
+     * @return `true` if items are equal.
+     */
+    friend bool
+    operator==(const TelemetryServer::Ina219& lhs, const TelemetryServer::Ina219& rhs);
+
+    /**
+     * @brief Stream operator to print information about a `TelemetryServer::Ina219`.
+     *
+     * @return A reference to the stream.
+     */
+    friend std::ostream& operator<<(std::ostream& str, TelemetryServer::Ina219 const& ina219);
+
+    /**
      * @brief Remote control status type.
      */
     struct RcStatus {
@@ -981,6 +1009,15 @@ public:
      * @return Result of request.
      */
     Result publish_battery(Battery battery) const;
+
+    /**
+     * @brief Publish to 'ina219' updates.
+     *
+     * This function is blocking.
+     *
+     * @return Result of request.
+     */
+    Result publish_ina219(Ina219 ina219) const;
 
     /**
      * @brief Publish to 'status text' updates.
