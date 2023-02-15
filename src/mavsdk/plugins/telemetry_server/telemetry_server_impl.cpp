@@ -206,12 +206,12 @@ TelemetryServer::Result TelemetryServerImpl::publish_ina219(
         _parent->get_own_component_id(),
         &msg,
         get_boot_time_ms(),
-        ina219.leftVoltage,
-        ina219.leftCurrent,
-        ina219.leftPower,
-        ina219.rightVoltage,
-        ina219.rightCurrent,
-        ina219.rightPower);
+        ina219.left_voltage,
+        ina219.left_current,
+        ina219.left_power,
+        ina219.right_voltage,
+        ina219.right_current,
+        ina219.right_power);
 
     add_msg_cache(MAVLINK_MSG_ID_ina219, msg);
 

@@ -1204,13 +1204,13 @@ void TelemetryImpl::process_ina219_status(const mavlink_message_t& message)
     mavlink_ina219_t ina219_reading;
     mavlink_msg_ina219_decode(&message, &ina219_reading);
     Telemetry::Ina219 new_ina219;
-    new_ina219.leftVoltage = ina219_reading.voltageLeft;
-    new_ina219.leftCurrent = ina219_reading.currentLeft;
-    new_ina219.leftPower = ina219_reading.powerLeft;
-    new_ina219.rightVoltage = ina219_reading.voltageRight;
-    new_ina219.rightCurrent = ina219_reading.currentRight;
-    new_ina219.rightPower = ina219_reading.powerRight;
     new_ina219.time = ina219_reading.timestamp;
+    new_ina219.left_voltage = ina219_reading.voltageLeft;
+    new_ina219.left_current = ina219_reading.currentLeft;
+    new_ina219.left_power = ina219_reading.powerLeft;
+    new_ina219.right_voltage = ina219_reading.voltageRight;
+    new_ina219.right_current = ina219_reading.currentRight;
+    new_ina219.right_power = ina219_reading.powerRight;  
 
     set_ina219(new_ina219);
 

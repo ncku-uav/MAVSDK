@@ -59,7 +59,7 @@ std::shared_ptr<System> get_system(Mavsdk& mavsdk)
 
 static void get_ina219(std::shared_ptr<System> system);
 
-    // static void get_position(std::shared_ptr<System> system);
+static void get_position(std::shared_ptr<System> system);
     // static void get_eulerangle(std::shared_ptr<System> system);
 
 
@@ -104,13 +104,15 @@ int main(int argc, char** argv)
     std::vector<std::thread> threads;
 
 
-
+    
     std::thread ina219 (&get_ina219,std::ref(system));
+    std::thread position (&get_position,std::ref(system));
 
 
 
  
     ina219.join();
+    position.join();
 
 
 
@@ -120,18 +122,27 @@ int main(int argc, char** argv)
 
 void get_ina219(std::shared_ptr<System> system) {
     auto telemetry = Telemetry{system};
-    std::string voltageLeft,currentLeft,powerLeft,voltageRight,currentRight,powerRight;
-    std::string timeStamp;
     while(1){
-        telemetry.subscribe_ina219([&timeStamp,&voltageLeft,&currentLeft,&powerLeft,&voltageRight,&currentRight,&powerRight](Telemetry::Ina219 ina219) {
-
-            std::cout << "Left solar: " << "\nvoltage: " << ina219.leftVoltage << "\ncurrent: " << ina219.leftCurrent << "\npower" << ina219.leftPower
-                    << "\nRight solar:" << "\nvoltage: " << ina219.rightVoltage << "\ncurrent: " << ina219.rightCurrent << "\npower" << ina219.rightPower;
+        telemetry.subscribe_ina219([](Telemetry::Ina219 ina219) {
+            std::cout << "Left solar: " << "\nvoltage: " << ina219.time << "\ncurrent: " << ina219.left_current << "\npower" << ina219.left_power
+                    << "\nRight solar:" << "\nvoltage: " << ina219.right_voltage << "\ncurrent: " << ina219.right_current << "\npower" << ina219.right_power;
 
         });   
     } 
     
+}
 
+void get_position(std::shared_ptr<System> system) {
+    auto telemetry = Telemetry{system};
+
+    while(1){
+	telemetry.subscribe_attitude_euler([](Telemetry::EulerAngle euler_angle) {
+
+        std::cout << "Vehicle is at: " << euler_angle.roll_deg << ", "<< euler_angle.pitch_deg
+        	<< " degrees\n";
+
+    });
+    }
 }
 
 

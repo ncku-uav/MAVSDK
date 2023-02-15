@@ -17,7 +17,7 @@ public:
     MOCK_CONST_METHOD1(subscribe_gps_info, void(Telemetry::GpsInfoCallback)){};
     MOCK_CONST_METHOD1(subscribe_raw_gps, void(Telemetry::RawGpsCallback)){};
     MOCK_CONST_METHOD1(subscribe_battery, void(Telemetry::BatteryCallback)){};
-    MOCK_CONST_METHOD1(subscribe_ina219, void(Telemetry:Ina219Callback)){};
+    MOCK_CONST_METHOD1(subscribe_ina219, void(Telemetry::Ina219Callback)){};
     MOCK_CONST_METHOD1(subscribe_flight_mode, void(Telemetry::FlightModeCallback)){};
     MOCK_CONST_METHOD1(subscribe_landed_state, void(Telemetry::LandedStateCallback)){};
     MOCK_CONST_METHOD1(

@@ -343,8 +343,8 @@ void print_battery(Telemetry::Battery battery)
 
 void print_ina219(Telemetry::Ina219 ina219)
 {
-    std::cout << "Ina219 " << "Left: " << ina219.leftVoltage << " v," << ina219.leftCurrent << " a," << ina219.leftPower << " w,"
-              << "Right: " << ina219.rightVoltage << " v," << ina219.rightCurrent << " a," << ina219.rightPower << " w,"<< '\n';
+    std::cout << "Ina219 " << "Left: " << ina219.left_voltage << " v," << ina219.left_current << " a," << ina219.left_power << " w,"
+              << "Right: " << ina219.right_voltage << " v," << ina219.right_current << " a," << ina219.right_power << " w,"<< '\n';
 
     _received_ina219 = true;
 }

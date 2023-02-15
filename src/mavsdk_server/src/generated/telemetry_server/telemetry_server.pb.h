@@ -48,7 +48,7 @@ struct TableStruct_telemetry_5fserver_2ftelemetry_5fserver_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxiliaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[59]
+  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[62]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::FieldMetadata field_metadata[];
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
@@ -100,6 +100,9 @@ extern HeadingDefaultTypeInternal _Heading_default_instance_;
 class Imu;
 struct ImuDefaultTypeInternal;
 extern ImuDefaultTypeInternal _Imu_default_instance_;
+class Ina219;
+struct Ina219DefaultTypeInternal;
+extern Ina219DefaultTypeInternal _Ina219_default_instance_;
 class MagneticFieldFrd;
 struct MagneticFieldFrdDefaultTypeInternal;
 extern MagneticFieldFrdDefaultTypeInternal _MagneticFieldFrd_default_instance_;
@@ -151,6 +154,12 @@ extern PublishImuResponseDefaultTypeInternal _PublishImuResponse_default_instanc
 class PublishInAirRequest;
 struct PublishInAirRequestDefaultTypeInternal;
 extern PublishInAirRequestDefaultTypeInternal _PublishInAirRequest_default_instance_;
+class PublishIna219Request;
+struct PublishIna219RequestDefaultTypeInternal;
+extern PublishIna219RequestDefaultTypeInternal _PublishIna219Request_default_instance_;
+class PublishIna219Response;
+struct PublishIna219ResponseDefaultTypeInternal;
+extern PublishIna219ResponseDefaultTypeInternal _PublishIna219Response_default_instance_;
 class PublishLandedStateRequest;
 struct PublishLandedStateRequestDefaultTypeInternal;
 extern PublishLandedStateRequestDefaultTypeInternal _PublishLandedStateRequest_default_instance_;
@@ -253,6 +262,7 @@ template<> ::mavsdk::rpc::telemetry_server::GpsInfo* Arena::CreateMaybeMessage<:
 template<> ::mavsdk::rpc::telemetry_server::GroundTruth* Arena::CreateMaybeMessage<::mavsdk::rpc::telemetry_server::GroundTruth>(Arena*);
 template<> ::mavsdk::rpc::telemetry_server::Heading* Arena::CreateMaybeMessage<::mavsdk::rpc::telemetry_server::Heading>(Arena*);
 template<> ::mavsdk::rpc::telemetry_server::Imu* Arena::CreateMaybeMessage<::mavsdk::rpc::telemetry_server::Imu>(Arena*);
+template<> ::mavsdk::rpc::telemetry_server::Ina219* Arena::CreateMaybeMessage<::mavsdk::rpc::telemetry_server::Ina219>(Arena*);
 template<> ::mavsdk::rpc::telemetry_server::MagneticFieldFrd* Arena::CreateMaybeMessage<::mavsdk::rpc::telemetry_server::MagneticFieldFrd>(Arena*);
 template<> ::mavsdk::rpc::telemetry_server::Odometry* Arena::CreateMaybeMessage<::mavsdk::rpc::telemetry_server::Odometry>(Arena*);
 template<> ::mavsdk::rpc::telemetry_server::Position* Arena::CreateMaybeMessage<::mavsdk::rpc::telemetry_server::Position>(Arena*);
@@ -270,6 +280,8 @@ template<> ::mavsdk::rpc::telemetry_server::PublishHomeResponse* Arena::CreateMa
 template<> ::mavsdk::rpc::telemetry_server::PublishImuRequest* Arena::CreateMaybeMessage<::mavsdk::rpc::telemetry_server::PublishImuRequest>(Arena*);
 template<> ::mavsdk::rpc::telemetry_server::PublishImuResponse* Arena::CreateMaybeMessage<::mavsdk::rpc::telemetry_server::PublishImuResponse>(Arena*);
 template<> ::mavsdk::rpc::telemetry_server::PublishInAirRequest* Arena::CreateMaybeMessage<::mavsdk::rpc::telemetry_server::PublishInAirRequest>(Arena*);
+template<> ::mavsdk::rpc::telemetry_server::PublishIna219Request* Arena::CreateMaybeMessage<::mavsdk::rpc::telemetry_server::PublishIna219Request>(Arena*);
+template<> ::mavsdk::rpc::telemetry_server::PublishIna219Response* Arena::CreateMaybeMessage<::mavsdk::rpc::telemetry_server::PublishIna219Response>(Arena*);
 template<> ::mavsdk::rpc::telemetry_server::PublishLandedStateRequest* Arena::CreateMaybeMessage<::mavsdk::rpc::telemetry_server::PublishLandedStateRequest>(Arena*);
 template<> ::mavsdk::rpc::telemetry_server::PublishOdometryRequest* Arena::CreateMaybeMessage<::mavsdk::rpc::telemetry_server::PublishOdometryRequest>(Arena*);
 template<> ::mavsdk::rpc::telemetry_server::PublishOdometryResponse* Arena::CreateMaybeMessage<::mavsdk::rpc::telemetry_server::PublishOdometryResponse>(Arena*);
@@ -1763,6 +1775,154 @@ class PublishBatteryRequest final :
 };
 // -------------------------------------------------------------------
 
+class PublishIna219Request final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:mavsdk.rpc.telemetry_server.PublishIna219Request) */ {
+ public:
+  inline PublishIna219Request() : PublishIna219Request(nullptr) {}
+  ~PublishIna219Request() override;
+  explicit constexpr PublishIna219Request(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  PublishIna219Request(const PublishIna219Request& from);
+  PublishIna219Request(PublishIna219Request&& from) noexcept
+    : PublishIna219Request() {
+    *this = ::std::move(from);
+  }
+
+  inline PublishIna219Request& operator=(const PublishIna219Request& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline PublishIna219Request& operator=(PublishIna219Request&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const PublishIna219Request& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const PublishIna219Request* internal_default_instance() {
+    return reinterpret_cast<const PublishIna219Request*>(
+               &_PublishIna219Request_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    8;
+
+  friend void swap(PublishIna219Request& a, PublishIna219Request& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(PublishIna219Request* other) {
+    if (other == this) return;
+    if (GetOwningArena() == other->GetOwningArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(PublishIna219Request* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline PublishIna219Request* New() const final {
+    return new PublishIna219Request();
+  }
+
+  PublishIna219Request* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<PublishIna219Request>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const PublishIna219Request& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom(const PublishIna219Request& from);
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message*to, const ::PROTOBUF_NAMESPACE_ID::Message&from);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(PublishIna219Request* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "mavsdk.rpc.telemetry_server.PublishIna219Request";
+  }
+  protected:
+  explicit PublishIna219Request(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kIna219FieldNumber = 1,
+  };
+  // .mavsdk.rpc.telemetry_server.Ina219 ina219 = 1;
+  bool has_ina219() const;
+  private:
+  bool _internal_has_ina219() const;
+  public:
+  void clear_ina219();
+  const ::mavsdk::rpc::telemetry_server::Ina219& ina219() const;
+  PROTOBUF_MUST_USE_RESULT ::mavsdk::rpc::telemetry_server::Ina219* release_ina219();
+  ::mavsdk::rpc::telemetry_server::Ina219* mutable_ina219();
+  void set_allocated_ina219(::mavsdk::rpc::telemetry_server::Ina219* ina219);
+  private:
+  const ::mavsdk::rpc::telemetry_server::Ina219& _internal_ina219() const;
+  ::mavsdk::rpc::telemetry_server::Ina219* _internal_mutable_ina219();
+  public:
+  void unsafe_arena_set_allocated_ina219(
+      ::mavsdk::rpc::telemetry_server::Ina219* ina219);
+  ::mavsdk::rpc::telemetry_server::Ina219* unsafe_arena_release_ina219();
+
+  // @@protoc_insertion_point(class_scope:mavsdk.rpc.telemetry_server.PublishIna219Request)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::mavsdk::rpc::telemetry_server::Ina219* ina219_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_telemetry_5fserver_2ftelemetry_5fserver_2eproto;
+};
+// -------------------------------------------------------------------
+
 class PublishRcStatusRequest final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:mavsdk.rpc.telemetry_server.PublishRcStatusRequest) */ {
  public:
@@ -1807,7 +1967,7 @@ class PublishRcStatusRequest final :
                &_PublishRcStatusRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    8;
+    9;
 
   friend void swap(PublishRcStatusRequest& a, PublishRcStatusRequest& b) {
     a.Swap(&b);
@@ -1955,7 +2115,7 @@ class PublishStatusTextRequest final :
                &_PublishStatusTextRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    9;
+    10;
 
   friend void swap(PublishStatusTextRequest& a, PublishStatusTextRequest& b) {
     a.Swap(&b);
@@ -2103,7 +2263,7 @@ class PublishOdometryRequest final :
                &_PublishOdometryRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    10;
+    11;
 
   friend void swap(PublishOdometryRequest& a, PublishOdometryRequest& b) {
     a.Swap(&b);
@@ -2251,7 +2411,7 @@ class PublishPositionVelocityNedRequest final :
                &_PublishPositionVelocityNedRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    11;
+    12;
 
   friend void swap(PublishPositionVelocityNedRequest& a, PublishPositionVelocityNedRequest& b) {
     a.Swap(&b);
@@ -2399,7 +2559,7 @@ class PublishGroundTruthRequest final :
                &_PublishGroundTruthRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    12;
+    13;
 
   friend void swap(PublishGroundTruthRequest& a, PublishGroundTruthRequest& b) {
     a.Swap(&b);
@@ -2547,7 +2707,7 @@ class PublishImuRequest final :
                &_PublishImuRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    13;
+    14;
 
   friend void swap(PublishImuRequest& a, PublishImuRequest& b) {
     a.Swap(&b);
@@ -2695,7 +2855,7 @@ class PublishScaledImuRequest final :
                &_PublishScaledImuRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    14;
+    15;
 
   friend void swap(PublishScaledImuRequest& a, PublishScaledImuRequest& b) {
     a.Swap(&b);
@@ -2843,7 +3003,7 @@ class PublishRawImuRequest final :
                &_PublishRawImuRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    15;
+    16;
 
   friend void swap(PublishRawImuRequest& a, PublishRawImuRequest& b) {
     a.Swap(&b);
@@ -2991,7 +3151,7 @@ class PublishUnixEpochTimeRequest final :
                &_PublishUnixEpochTimeRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    16;
+    17;
 
   friend void swap(PublishUnixEpochTimeRequest& a, PublishUnixEpochTimeRequest& b) {
     a.Swap(&b);
@@ -3130,7 +3290,7 @@ class PublishPositionResponse final :
                &_PublishPositionResponse_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    17;
+    18;
 
   friend void swap(PublishPositionResponse& a, PublishPositionResponse& b) {
     a.Swap(&b);
@@ -3278,7 +3438,7 @@ class PublishHomeResponse final :
                &_PublishHomeResponse_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    18;
+    19;
 
   friend void swap(PublishHomeResponse& a, PublishHomeResponse& b) {
     a.Swap(&b);
@@ -3426,7 +3586,7 @@ class PublishSysStatusResponse final :
                &_PublishSysStatusResponse_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    19;
+    20;
 
   friend void swap(PublishSysStatusResponse& a, PublishSysStatusResponse& b) {
     a.Swap(&b);
@@ -3574,7 +3734,7 @@ class PublishExtendedSysStateResponse final :
                &_PublishExtendedSysStateResponse_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    20;
+    21;
 
   friend void swap(PublishExtendedSysStateResponse& a, PublishExtendedSysStateResponse& b) {
     a.Swap(&b);
@@ -3722,7 +3882,7 @@ class PublishRawGpsResponse final :
                &_PublishRawGpsResponse_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    21;
+    22;
 
   friend void swap(PublishRawGpsResponse& a, PublishRawGpsResponse& b) {
     a.Swap(&b);
@@ -3870,7 +4030,7 @@ class PublishBatteryResponse final :
                &_PublishBatteryResponse_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    22;
+    23;
 
   friend void swap(PublishBatteryResponse& a, PublishBatteryResponse& b) {
     a.Swap(&b);
@@ -3974,6 +4134,154 @@ class PublishBatteryResponse final :
 };
 // -------------------------------------------------------------------
 
+class PublishIna219Response final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:mavsdk.rpc.telemetry_server.PublishIna219Response) */ {
+ public:
+  inline PublishIna219Response() : PublishIna219Response(nullptr) {}
+  ~PublishIna219Response() override;
+  explicit constexpr PublishIna219Response(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  PublishIna219Response(const PublishIna219Response& from);
+  PublishIna219Response(PublishIna219Response&& from) noexcept
+    : PublishIna219Response() {
+    *this = ::std::move(from);
+  }
+
+  inline PublishIna219Response& operator=(const PublishIna219Response& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline PublishIna219Response& operator=(PublishIna219Response&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const PublishIna219Response& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const PublishIna219Response* internal_default_instance() {
+    return reinterpret_cast<const PublishIna219Response*>(
+               &_PublishIna219Response_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    24;
+
+  friend void swap(PublishIna219Response& a, PublishIna219Response& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(PublishIna219Response* other) {
+    if (other == this) return;
+    if (GetOwningArena() == other->GetOwningArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(PublishIna219Response* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline PublishIna219Response* New() const final {
+    return new PublishIna219Response();
+  }
+
+  PublishIna219Response* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<PublishIna219Response>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const PublishIna219Response& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom(const PublishIna219Response& from);
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message*to, const ::PROTOBUF_NAMESPACE_ID::Message&from);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(PublishIna219Response* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "mavsdk.rpc.telemetry_server.PublishIna219Response";
+  }
+  protected:
+  explicit PublishIna219Response(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kTelemetryServerResultFieldNumber = 1,
+  };
+  // .mavsdk.rpc.telemetry_server.TelemetryServerResult telemetry_server_result = 1;
+  bool has_telemetry_server_result() const;
+  private:
+  bool _internal_has_telemetry_server_result() const;
+  public:
+  void clear_telemetry_server_result();
+  const ::mavsdk::rpc::telemetry_server::TelemetryServerResult& telemetry_server_result() const;
+  PROTOBUF_MUST_USE_RESULT ::mavsdk::rpc::telemetry_server::TelemetryServerResult* release_telemetry_server_result();
+  ::mavsdk::rpc::telemetry_server::TelemetryServerResult* mutable_telemetry_server_result();
+  void set_allocated_telemetry_server_result(::mavsdk::rpc::telemetry_server::TelemetryServerResult* telemetry_server_result);
+  private:
+  const ::mavsdk::rpc::telemetry_server::TelemetryServerResult& _internal_telemetry_server_result() const;
+  ::mavsdk::rpc::telemetry_server::TelemetryServerResult* _internal_mutable_telemetry_server_result();
+  public:
+  void unsafe_arena_set_allocated_telemetry_server_result(
+      ::mavsdk::rpc::telemetry_server::TelemetryServerResult* telemetry_server_result);
+  ::mavsdk::rpc::telemetry_server::TelemetryServerResult* unsafe_arena_release_telemetry_server_result();
+
+  // @@protoc_insertion_point(class_scope:mavsdk.rpc.telemetry_server.PublishIna219Response)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::mavsdk::rpc::telemetry_server::TelemetryServerResult* telemetry_server_result_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_telemetry_5fserver_2ftelemetry_5fserver_2eproto;
+};
+// -------------------------------------------------------------------
+
 class PublishStatusTextResponse final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:mavsdk.rpc.telemetry_server.PublishStatusTextResponse) */ {
  public:
@@ -4018,7 +4326,7 @@ class PublishStatusTextResponse final :
                &_PublishStatusTextResponse_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    23;
+    25;
 
   friend void swap(PublishStatusTextResponse& a, PublishStatusTextResponse& b) {
     a.Swap(&b);
@@ -4166,7 +4474,7 @@ class PublishOdometryResponse final :
                &_PublishOdometryResponse_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    24;
+    26;
 
   friend void swap(PublishOdometryResponse& a, PublishOdometryResponse& b) {
     a.Swap(&b);
@@ -4314,7 +4622,7 @@ class PublishPositionVelocityNedResponse final :
                &_PublishPositionVelocityNedResponse_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    25;
+    27;
 
   friend void swap(PublishPositionVelocityNedResponse& a, PublishPositionVelocityNedResponse& b) {
     a.Swap(&b);
@@ -4462,7 +4770,7 @@ class PublishGroundTruthResponse final :
                &_PublishGroundTruthResponse_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    26;
+    28;
 
   friend void swap(PublishGroundTruthResponse& a, PublishGroundTruthResponse& b) {
     a.Swap(&b);
@@ -4610,7 +4918,7 @@ class PublishImuResponse final :
                &_PublishImuResponse_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    27;
+    29;
 
   friend void swap(PublishImuResponse& a, PublishImuResponse& b) {
     a.Swap(&b);
@@ -4758,7 +5066,7 @@ class PublishScaledImuResponse final :
                &_PublishScaledImuResponse_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    28;
+    30;
 
   friend void swap(PublishScaledImuResponse& a, PublishScaledImuResponse& b) {
     a.Swap(&b);
@@ -4906,7 +5214,7 @@ class PublishRawImuResponse final :
                &_PublishRawImuResponse_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    29;
+    31;
 
   friend void swap(PublishRawImuResponse& a, PublishRawImuResponse& b) {
     a.Swap(&b);
@@ -5054,7 +5362,7 @@ class PublishUnixEpochTimeResponse final :
                &_PublishUnixEpochTimeResponse_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    30;
+    32;
 
   friend void swap(PublishUnixEpochTimeResponse& a, PublishUnixEpochTimeResponse& b) {
     a.Swap(&b);
@@ -5202,7 +5510,7 @@ class Position final :
                &_Position_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    31;
+    33;
 
   friend void swap(Position& a, Position& b) {
     a.Swap(&b);
@@ -5374,7 +5682,7 @@ class Heading final :
                &_Heading_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    32;
+    34;
 
   friend void swap(Heading& a, Heading& b) {
     a.Swap(&b);
@@ -5513,7 +5821,7 @@ class Quaternion final :
                &_Quaternion_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    33;
+    35;
 
   friend void swap(Quaternion& a, Quaternion& b) {
     a.Swap(&b);
@@ -5696,7 +6004,7 @@ class EulerAngle final :
                &_EulerAngle_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    34;
+    36;
 
   friend void swap(EulerAngle& a, EulerAngle& b) {
     a.Swap(&b);
@@ -5868,7 +6176,7 @@ class AngularVelocityBody final :
                &_AngularVelocityBody_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    35;
+    37;
 
   friend void swap(AngularVelocityBody& a, AngularVelocityBody& b) {
     a.Swap(&b);
@@ -6029,7 +6337,7 @@ class GpsInfo final :
                &_GpsInfo_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    36;
+    38;
 
   friend void swap(GpsInfo& a, GpsInfo& b) {
     a.Swap(&b);
@@ -6179,7 +6487,7 @@ class RawGps final :
                &_RawGps_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    37;
+    39;
 
   friend void swap(RawGps& a, RawGps& b) {
     a.Swap(&b);
@@ -6461,7 +6769,7 @@ class Battery final :
                &_Battery_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    38;
+    40;
 
   friend void swap(Battery& a, Battery& b) {
     a.Swap(&b);
@@ -6567,6 +6875,211 @@ class Battery final :
 };
 // -------------------------------------------------------------------
 
+class Ina219 final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:mavsdk.rpc.telemetry_server.Ina219) */ {
+ public:
+  inline Ina219() : Ina219(nullptr) {}
+  ~Ina219() override;
+  explicit constexpr Ina219(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  Ina219(const Ina219& from);
+  Ina219(Ina219&& from) noexcept
+    : Ina219() {
+    *this = ::std::move(from);
+  }
+
+  inline Ina219& operator=(const Ina219& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline Ina219& operator=(Ina219&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const Ina219& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const Ina219* internal_default_instance() {
+    return reinterpret_cast<const Ina219*>(
+               &_Ina219_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    41;
+
+  friend void swap(Ina219& a, Ina219& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(Ina219* other) {
+    if (other == this) return;
+    if (GetOwningArena() == other->GetOwningArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(Ina219* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline Ina219* New() const final {
+    return new Ina219();
+  }
+
+  Ina219* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<Ina219>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const Ina219& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom(const Ina219& from);
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message*to, const ::PROTOBUF_NAMESPACE_ID::Message&from);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(Ina219* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "mavsdk.rpc.telemetry_server.Ina219";
+  }
+  protected:
+  explicit Ina219(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kTimeFieldNumber = 1,
+    kLeftVoltageFieldNumber = 2,
+    kLeftCurrentFieldNumber = 3,
+    kLeftPowerFieldNumber = 4,
+    kRightVoltageFieldNumber = 5,
+    kRightCurrentFieldNumber = 6,
+    kRightPowerFieldNumber = 7,
+  };
+  // uint64 time = 1 [(.mavsdk.options.default_value) = "NaN"];
+  void clear_time();
+  ::PROTOBUF_NAMESPACE_ID::uint64 time() const;
+  void set_time(::PROTOBUF_NAMESPACE_ID::uint64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::uint64 _internal_time() const;
+  void _internal_set_time(::PROTOBUF_NAMESPACE_ID::uint64 value);
+  public:
+
+  // float left_voltage = 2 [(.mavsdk.options.default_value) = "NaN"];
+  void clear_left_voltage();
+  float left_voltage() const;
+  void set_left_voltage(float value);
+  private:
+  float _internal_left_voltage() const;
+  void _internal_set_left_voltage(float value);
+  public:
+
+  // float left_current = 3 [(.mavsdk.options.default_value) = "NaN"];
+  void clear_left_current();
+  float left_current() const;
+  void set_left_current(float value);
+  private:
+  float _internal_left_current() const;
+  void _internal_set_left_current(float value);
+  public:
+
+  // float left_power = 4 [(.mavsdk.options.default_value) = "NaN"];
+  void clear_left_power();
+  float left_power() const;
+  void set_left_power(float value);
+  private:
+  float _internal_left_power() const;
+  void _internal_set_left_power(float value);
+  public:
+
+  // float right_voltage = 5 [(.mavsdk.options.default_value) = "NaN"];
+  void clear_right_voltage();
+  float right_voltage() const;
+  void set_right_voltage(float value);
+  private:
+  float _internal_right_voltage() const;
+  void _internal_set_right_voltage(float value);
+  public:
+
+  // float right_current = 6 [(.mavsdk.options.default_value) = "NaN"];
+  void clear_right_current();
+  float right_current() const;
+  void set_right_current(float value);
+  private:
+  float _internal_right_current() const;
+  void _internal_set_right_current(float value);
+  public:
+
+  // float right_power = 7 [(.mavsdk.options.default_value) = "NaN"];
+  void clear_right_power();
+  float right_power() const;
+  void set_right_power(float value);
+  private:
+  float _internal_right_power() const;
+  void _internal_set_right_power(float value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:mavsdk.rpc.telemetry_server.Ina219)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::uint64 time_;
+  float left_voltage_;
+  float left_current_;
+  float left_power_;
+  float right_voltage_;
+  float right_current_;
+  float right_power_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_telemetry_5fserver_2ftelemetry_5fserver_2eproto;
+};
+// -------------------------------------------------------------------
+
 class RcStatus final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:mavsdk.rpc.telemetry_server.RcStatus) */ {
  public:
@@ -6611,7 +7124,7 @@ class RcStatus final :
                &_RcStatus_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    39;
+    42;
 
   friend void swap(RcStatus& a, RcStatus& b) {
     a.Swap(&b);
@@ -6772,7 +7285,7 @@ class StatusText final :
                &_StatusText_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    40;
+    43;
 
   friend void swap(StatusText& a, StatusText& b) {
     a.Swap(&b);
@@ -6927,7 +7440,7 @@ class ActuatorControlTarget final :
                &_ActuatorControlTarget_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    41;
+    44;
 
   friend void swap(ActuatorControlTarget& a, ActuatorControlTarget& b) {
     a.Swap(&b);
@@ -7090,7 +7603,7 @@ class ActuatorOutputStatus final :
                &_ActuatorOutputStatus_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    42;
+    45;
 
   friend void swap(ActuatorOutputStatus& a, ActuatorOutputStatus& b) {
     a.Swap(&b);
@@ -7253,7 +7766,7 @@ class Covariance final :
                &_Covariance_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    43;
+    46;
 
   friend void swap(Covariance& a, Covariance& b) {
     a.Swap(&b);
@@ -7405,7 +7918,7 @@ class VelocityBody final :
                &_VelocityBody_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    44;
+    47;
 
   friend void swap(VelocityBody& a, VelocityBody& b) {
     a.Swap(&b);
@@ -7566,7 +8079,7 @@ class PositionBody final :
                &_PositionBody_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    45;
+    48;
 
   friend void swap(PositionBody& a, PositionBody& b) {
     a.Swap(&b);
@@ -7727,7 +8240,7 @@ class Odometry final :
                &_Odometry_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    46;
+    49;
 
   friend void swap(Odometry& a, Odometry& b) {
     a.Swap(&b);
@@ -8042,7 +8555,7 @@ class DistanceSensor final :
                &_DistanceSensor_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    47;
+    50;
 
   friend void swap(DistanceSensor& a, DistanceSensor& b) {
     a.Swap(&b);
@@ -8203,7 +8716,7 @@ class ScaledPressure final :
                &_ScaledPressure_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    48;
+    51;
 
   friend void swap(ScaledPressure& a, ScaledPressure& b) {
     a.Swap(&b);
@@ -8386,7 +8899,7 @@ class PositionNed final :
                &_PositionNed_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    49;
+    52;
 
   friend void swap(PositionNed& a, PositionNed& b) {
     a.Swap(&b);
@@ -8547,7 +9060,7 @@ class VelocityNed final :
                &_VelocityNed_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    50;
+    53;
 
   friend void swap(VelocityNed& a, VelocityNed& b) {
     a.Swap(&b);
@@ -8708,7 +9221,7 @@ class PositionVelocityNed final :
                &_PositionVelocityNed_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    51;
+    54;
 
   friend void swap(PositionVelocityNed& a, PositionVelocityNed& b) {
     a.Swap(&b);
@@ -8876,7 +9389,7 @@ class GroundTruth final :
                &_GroundTruth_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    52;
+    55;
 
   friend void swap(GroundTruth& a, GroundTruth& b) {
     a.Swap(&b);
@@ -9037,7 +9550,7 @@ class FixedwingMetrics final :
                &_FixedwingMetrics_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    53;
+    56;
 
   friend void swap(FixedwingMetrics& a, FixedwingMetrics& b) {
     a.Swap(&b);
@@ -9198,7 +9711,7 @@ class AccelerationFrd final :
                &_AccelerationFrd_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    54;
+    57;
 
   friend void swap(AccelerationFrd& a, AccelerationFrd& b) {
     a.Swap(&b);
@@ -9359,7 +9872,7 @@ class AngularVelocityFrd final :
                &_AngularVelocityFrd_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    55;
+    58;
 
   friend void swap(AngularVelocityFrd& a, AngularVelocityFrd& b) {
     a.Swap(&b);
@@ -9520,7 +10033,7 @@ class MagneticFieldFrd final :
                &_MagneticFieldFrd_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    56;
+    59;
 
   friend void swap(MagneticFieldFrd& a, MagneticFieldFrd& b) {
     a.Swap(&b);
@@ -9681,7 +10194,7 @@ class Imu final :
                &_Imu_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    57;
+    60;
 
   friend void swap(Imu& a, Imu& b) {
     a.Swap(&b);
@@ -9891,7 +10404,7 @@ class TelemetryServerResult final :
                &_TelemetryServerResult_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    58;
+    61;
 
   friend void swap(TelemetryServerResult& a, TelemetryServerResult& b) {
     a.Swap(&b);
@@ -10979,6 +11492,100 @@ inline void PublishBatteryRequest::set_allocated_battery(::mavsdk::rpc::telemetr
   }
   battery_ = battery;
   // @@protoc_insertion_point(field_set_allocated:mavsdk.rpc.telemetry_server.PublishBatteryRequest.battery)
+}
+
+// -------------------------------------------------------------------
+
+// PublishIna219Request
+
+// .mavsdk.rpc.telemetry_server.Ina219 ina219 = 1;
+inline bool PublishIna219Request::_internal_has_ina219() const {
+  return this != internal_default_instance() && ina219_ != nullptr;
+}
+inline bool PublishIna219Request::has_ina219() const {
+  return _internal_has_ina219();
+}
+inline void PublishIna219Request::clear_ina219() {
+  if (GetArenaForAllocation() == nullptr && ina219_ != nullptr) {
+    delete ina219_;
+  }
+  ina219_ = nullptr;
+}
+inline const ::mavsdk::rpc::telemetry_server::Ina219& PublishIna219Request::_internal_ina219() const {
+  const ::mavsdk::rpc::telemetry_server::Ina219* p = ina219_;
+  return p != nullptr ? *p : reinterpret_cast<const ::mavsdk::rpc::telemetry_server::Ina219&>(
+      ::mavsdk::rpc::telemetry_server::_Ina219_default_instance_);
+}
+inline const ::mavsdk::rpc::telemetry_server::Ina219& PublishIna219Request::ina219() const {
+  // @@protoc_insertion_point(field_get:mavsdk.rpc.telemetry_server.PublishIna219Request.ina219)
+  return _internal_ina219();
+}
+inline void PublishIna219Request::unsafe_arena_set_allocated_ina219(
+    ::mavsdk::rpc::telemetry_server::Ina219* ina219) {
+  if (GetArenaForAllocation() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(ina219_);
+  }
+  ina219_ = ina219;
+  if (ina219) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:mavsdk.rpc.telemetry_server.PublishIna219Request.ina219)
+}
+inline ::mavsdk::rpc::telemetry_server::Ina219* PublishIna219Request::release_ina219() {
+  
+  ::mavsdk::rpc::telemetry_server::Ina219* temp = ina219_;
+  ina219_ = nullptr;
+#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
+  auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
+  temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  if (GetArenaForAllocation() == nullptr) { delete old; }
+#else  // PROTOBUF_FORCE_COPY_IN_RELEASE
+  if (GetArenaForAllocation() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
+  return temp;
+}
+inline ::mavsdk::rpc::telemetry_server::Ina219* PublishIna219Request::unsafe_arena_release_ina219() {
+  // @@protoc_insertion_point(field_release:mavsdk.rpc.telemetry_server.PublishIna219Request.ina219)
+  
+  ::mavsdk::rpc::telemetry_server::Ina219* temp = ina219_;
+  ina219_ = nullptr;
+  return temp;
+}
+inline ::mavsdk::rpc::telemetry_server::Ina219* PublishIna219Request::_internal_mutable_ina219() {
+  
+  if (ina219_ == nullptr) {
+    auto* p = CreateMaybeMessage<::mavsdk::rpc::telemetry_server::Ina219>(GetArenaForAllocation());
+    ina219_ = p;
+  }
+  return ina219_;
+}
+inline ::mavsdk::rpc::telemetry_server::Ina219* PublishIna219Request::mutable_ina219() {
+  ::mavsdk::rpc::telemetry_server::Ina219* _msg = _internal_mutable_ina219();
+  // @@protoc_insertion_point(field_mutable:mavsdk.rpc.telemetry_server.PublishIna219Request.ina219)
+  return _msg;
+}
+inline void PublishIna219Request::set_allocated_ina219(::mavsdk::rpc::telemetry_server::Ina219* ina219) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
+  if (message_arena == nullptr) {
+    delete ina219_;
+  }
+  if (ina219) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper<::mavsdk::rpc::telemetry_server::Ina219>::GetOwningArena(ina219);
+    if (message_arena != submessage_arena) {
+      ina219 = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, ina219, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  ina219_ = ina219;
+  // @@protoc_insertion_point(field_set_allocated:mavsdk.rpc.telemetry_server.PublishIna219Request.ina219)
 }
 
 // -------------------------------------------------------------------
@@ -12319,6 +12926,100 @@ inline void PublishBatteryResponse::set_allocated_telemetry_server_result(::mavs
   }
   telemetry_server_result_ = telemetry_server_result;
   // @@protoc_insertion_point(field_set_allocated:mavsdk.rpc.telemetry_server.PublishBatteryResponse.telemetry_server_result)
+}
+
+// -------------------------------------------------------------------
+
+// PublishIna219Response
+
+// .mavsdk.rpc.telemetry_server.TelemetryServerResult telemetry_server_result = 1;
+inline bool PublishIna219Response::_internal_has_telemetry_server_result() const {
+  return this != internal_default_instance() && telemetry_server_result_ != nullptr;
+}
+inline bool PublishIna219Response::has_telemetry_server_result() const {
+  return _internal_has_telemetry_server_result();
+}
+inline void PublishIna219Response::clear_telemetry_server_result() {
+  if (GetArenaForAllocation() == nullptr && telemetry_server_result_ != nullptr) {
+    delete telemetry_server_result_;
+  }
+  telemetry_server_result_ = nullptr;
+}
+inline const ::mavsdk::rpc::telemetry_server::TelemetryServerResult& PublishIna219Response::_internal_telemetry_server_result() const {
+  const ::mavsdk::rpc::telemetry_server::TelemetryServerResult* p = telemetry_server_result_;
+  return p != nullptr ? *p : reinterpret_cast<const ::mavsdk::rpc::telemetry_server::TelemetryServerResult&>(
+      ::mavsdk::rpc::telemetry_server::_TelemetryServerResult_default_instance_);
+}
+inline const ::mavsdk::rpc::telemetry_server::TelemetryServerResult& PublishIna219Response::telemetry_server_result() const {
+  // @@protoc_insertion_point(field_get:mavsdk.rpc.telemetry_server.PublishIna219Response.telemetry_server_result)
+  return _internal_telemetry_server_result();
+}
+inline void PublishIna219Response::unsafe_arena_set_allocated_telemetry_server_result(
+    ::mavsdk::rpc::telemetry_server::TelemetryServerResult* telemetry_server_result) {
+  if (GetArenaForAllocation() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(telemetry_server_result_);
+  }
+  telemetry_server_result_ = telemetry_server_result;
+  if (telemetry_server_result) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:mavsdk.rpc.telemetry_server.PublishIna219Response.telemetry_server_result)
+}
+inline ::mavsdk::rpc::telemetry_server::TelemetryServerResult* PublishIna219Response::release_telemetry_server_result() {
+  
+  ::mavsdk::rpc::telemetry_server::TelemetryServerResult* temp = telemetry_server_result_;
+  telemetry_server_result_ = nullptr;
+#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
+  auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
+  temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  if (GetArenaForAllocation() == nullptr) { delete old; }
+#else  // PROTOBUF_FORCE_COPY_IN_RELEASE
+  if (GetArenaForAllocation() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
+  return temp;
+}
+inline ::mavsdk::rpc::telemetry_server::TelemetryServerResult* PublishIna219Response::unsafe_arena_release_telemetry_server_result() {
+  // @@protoc_insertion_point(field_release:mavsdk.rpc.telemetry_server.PublishIna219Response.telemetry_server_result)
+  
+  ::mavsdk::rpc::telemetry_server::TelemetryServerResult* temp = telemetry_server_result_;
+  telemetry_server_result_ = nullptr;
+  return temp;
+}
+inline ::mavsdk::rpc::telemetry_server::TelemetryServerResult* PublishIna219Response::_internal_mutable_telemetry_server_result() {
+  
+  if (telemetry_server_result_ == nullptr) {
+    auto* p = CreateMaybeMessage<::mavsdk::rpc::telemetry_server::TelemetryServerResult>(GetArenaForAllocation());
+    telemetry_server_result_ = p;
+  }
+  return telemetry_server_result_;
+}
+inline ::mavsdk::rpc::telemetry_server::TelemetryServerResult* PublishIna219Response::mutable_telemetry_server_result() {
+  ::mavsdk::rpc::telemetry_server::TelemetryServerResult* _msg = _internal_mutable_telemetry_server_result();
+  // @@protoc_insertion_point(field_mutable:mavsdk.rpc.telemetry_server.PublishIna219Response.telemetry_server_result)
+  return _msg;
+}
+inline void PublishIna219Response::set_allocated_telemetry_server_result(::mavsdk::rpc::telemetry_server::TelemetryServerResult* telemetry_server_result) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
+  if (message_arena == nullptr) {
+    delete telemetry_server_result_;
+  }
+  if (telemetry_server_result) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper<::mavsdk::rpc::telemetry_server::TelemetryServerResult>::GetOwningArena(telemetry_server_result);
+    if (message_arena != submessage_arena) {
+      telemetry_server_result = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, telemetry_server_result, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  telemetry_server_result_ = telemetry_server_result;
+  // @@protoc_insertion_point(field_set_allocated:mavsdk.rpc.telemetry_server.PublishIna219Response.telemetry_server_result)
 }
 
 // -------------------------------------------------------------------
@@ -13803,6 +14504,150 @@ inline void Battery::_internal_set_remaining_percent(float value) {
 inline void Battery::set_remaining_percent(float value) {
   _internal_set_remaining_percent(value);
   // @@protoc_insertion_point(field_set:mavsdk.rpc.telemetry_server.Battery.remaining_percent)
+}
+
+// -------------------------------------------------------------------
+
+// Ina219
+
+// uint64 time = 1 [(.mavsdk.options.default_value) = "NaN"];
+inline void Ina219::clear_time() {
+  time_ = uint64_t{0u};
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint64 Ina219::_internal_time() const {
+  return time_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint64 Ina219::time() const {
+  // @@protoc_insertion_point(field_get:mavsdk.rpc.telemetry_server.Ina219.time)
+  return _internal_time();
+}
+inline void Ina219::_internal_set_time(::PROTOBUF_NAMESPACE_ID::uint64 value) {
+  
+  time_ = value;
+}
+inline void Ina219::set_time(::PROTOBUF_NAMESPACE_ID::uint64 value) {
+  _internal_set_time(value);
+  // @@protoc_insertion_point(field_set:mavsdk.rpc.telemetry_server.Ina219.time)
+}
+
+// float left_voltage = 2 [(.mavsdk.options.default_value) = "NaN"];
+inline void Ina219::clear_left_voltage() {
+  left_voltage_ = 0;
+}
+inline float Ina219::_internal_left_voltage() const {
+  return left_voltage_;
+}
+inline float Ina219::left_voltage() const {
+  // @@protoc_insertion_point(field_get:mavsdk.rpc.telemetry_server.Ina219.left_voltage)
+  return _internal_left_voltage();
+}
+inline void Ina219::_internal_set_left_voltage(float value) {
+  
+  left_voltage_ = value;
+}
+inline void Ina219::set_left_voltage(float value) {
+  _internal_set_left_voltage(value);
+  // @@protoc_insertion_point(field_set:mavsdk.rpc.telemetry_server.Ina219.left_voltage)
+}
+
+// float left_current = 3 [(.mavsdk.options.default_value) = "NaN"];
+inline void Ina219::clear_left_current() {
+  left_current_ = 0;
+}
+inline float Ina219::_internal_left_current() const {
+  return left_current_;
+}
+inline float Ina219::left_current() const {
+  // @@protoc_insertion_point(field_get:mavsdk.rpc.telemetry_server.Ina219.left_current)
+  return _internal_left_current();
+}
+inline void Ina219::_internal_set_left_current(float value) {
+  
+  left_current_ = value;
+}
+inline void Ina219::set_left_current(float value) {
+  _internal_set_left_current(value);
+  // @@protoc_insertion_point(field_set:mavsdk.rpc.telemetry_server.Ina219.left_current)
+}
+
+// float left_power = 4 [(.mavsdk.options.default_value) = "NaN"];
+inline void Ina219::clear_left_power() {
+  left_power_ = 0;
+}
+inline float Ina219::_internal_left_power() const {
+  return left_power_;
+}
+inline float Ina219::left_power() const {
+  // @@protoc_insertion_point(field_get:mavsdk.rpc.telemetry_server.Ina219.left_power)
+  return _internal_left_power();
+}
+inline void Ina219::_internal_set_left_power(float value) {
+  
+  left_power_ = value;
+}
+inline void Ina219::set_left_power(float value) {
+  _internal_set_left_power(value);
+  // @@protoc_insertion_point(field_set:mavsdk.rpc.telemetry_server.Ina219.left_power)
+}
+
+// float right_voltage = 5 [(.mavsdk.options.default_value) = "NaN"];
+inline void Ina219::clear_right_voltage() {
+  right_voltage_ = 0;
+}
+inline float Ina219::_internal_right_voltage() const {
+  return right_voltage_;
+}
+inline float Ina219::right_voltage() const {
+  // @@protoc_insertion_point(field_get:mavsdk.rpc.telemetry_server.Ina219.right_voltage)
+  return _internal_right_voltage();
+}
+inline void Ina219::_internal_set_right_voltage(float value) {
+  
+  right_voltage_ = value;
+}
+inline void Ina219::set_right_voltage(float value) {
+  _internal_set_right_voltage(value);
+  // @@protoc_insertion_point(field_set:mavsdk.rpc.telemetry_server.Ina219.right_voltage)
+}
+
+// float right_current = 6 [(.mavsdk.options.default_value) = "NaN"];
+inline void Ina219::clear_right_current() {
+  right_current_ = 0;
+}
+inline float Ina219::_internal_right_current() const {
+  return right_current_;
+}
+inline float Ina219::right_current() const {
+  // @@protoc_insertion_point(field_get:mavsdk.rpc.telemetry_server.Ina219.right_current)
+  return _internal_right_current();
+}
+inline void Ina219::_internal_set_right_current(float value) {
+  
+  right_current_ = value;
+}
+inline void Ina219::set_right_current(float value) {
+  _internal_set_right_current(value);
+  // @@protoc_insertion_point(field_set:mavsdk.rpc.telemetry_server.Ina219.right_current)
+}
+
+// float right_power = 7 [(.mavsdk.options.default_value) = "NaN"];
+inline void Ina219::clear_right_power() {
+  right_power_ = 0;
+}
+inline float Ina219::_internal_right_power() const {
+  return right_power_;
+}
+inline float Ina219::right_power() const {
+  // @@protoc_insertion_point(field_get:mavsdk.rpc.telemetry_server.Ina219.right_power)
+  return _internal_right_power();
+}
+inline void Ina219::_internal_set_right_power(float value) {
+  
+  right_power_ = value;
+}
+inline void Ina219::set_right_power(float value) {
+  _internal_set_right_power(value);
+  // @@protoc_insertion_point(field_set:mavsdk.rpc.telemetry_server.Ina219.right_power)
 }
 
 // -------------------------------------------------------------------
@@ -16051,6 +16896,12 @@ inline void TelemetryServerResult::set_allocated_result_str(std::string* result_
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------
